@@ -10,7 +10,8 @@ function envoyerEmail(
     string $message
 ): bool {
     try {
-        $smtp = require 'C:/xampp/private_ecf/smtp.php';
+        // Configuration SMTP compatible XAMPP et Alwaysdata
+        $smtp = require __DIR__ . '/config/smtp.php';
 
         $mail = new PHPMailer(true);
 
@@ -20,11 +21,11 @@ function envoyerEmail(
         $mail->Username = $smtp['username'];
         $mail->Password = $smtp['password'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = $smtp['port'];
+        $mail->Port = (int) $smtp['port'];
 
+        // Vérification TLS via les certificats du système
         $mail->SMTPOptions = [
             'ssl' => [
-                'cafile' => 'C:/xampp/php/extras/ssl/cacert.pem',
                 'verify_peer' => true,
                 'verify_peer_name' => true,
                 'allow_self_signed' => false

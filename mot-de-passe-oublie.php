@@ -6,8 +6,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-// Configuration privée, en dehors de htdocs
-$smtp = require 'C:/xampp/private_ecf/smtp.php';
+// Configuration SMTP privée, compatible XAMPP et Alwaysdata
+$smtp = require __DIR__ . '/config/smtp.php';
 
 if (
     empty($smtp['hmac_key']) ||
@@ -201,13 +201,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->Password = $smtp['password'];
                     $mail->SMTPSecure =
                         PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = $smtp['port'];
+                    $mail->Port = (int) $smtp['port'];
 
-                    // Vérification du certificat SSL/TLS
+                    // Vérification du certificat TLS
                     $mail->SMTPOptions = [
                         'ssl' => [
-                            'cafile' =>
-                                'C:/xampp/php/extras/ssl/cacert.pem',
                             'verify_peer' => true,
                             'verify_peer_name' => true,
                             'allow_self_signed' => false
