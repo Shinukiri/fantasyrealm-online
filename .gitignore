@@ -1,0 +1,26 @@
+# Dépendances Composer
+/vendor/
+
+# Configuration et secrets
+.env
+.env.*
+!.env.example
+/config/*local.php
+/config/*secret.php
+/config/*secrets.php
+/config/*credentials.php
+/private/
+*.pem
+*.key
+
+# Fichiers temporaires
+*.log
+*.tmp
+*.bak
+*.sql.gz
+
+# Configuration locale
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

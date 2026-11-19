@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "*",
+        "mongodb/mongodb": "2.5.1"
+    }
+}
